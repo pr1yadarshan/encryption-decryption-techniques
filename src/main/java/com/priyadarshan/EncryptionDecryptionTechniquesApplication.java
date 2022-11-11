@@ -8,6 +8,7 @@ public class EncryptionDecryptionTechniquesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EncryptionDecryptionTechniquesApplication.class, args);
+		System.out.println("******** EncryptionDecryptionTechniquesApplication Started ! ********");
 	}
 
 }
