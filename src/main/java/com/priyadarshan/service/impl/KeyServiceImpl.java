@@ -18,8 +18,9 @@ import com.priyadarshan.service.KeyService;
 public class KeyServiceImpl implements KeyService {
 
 	@Override
-	public List<com.priyadarshan.entity.KeyPair> getRSAKeyPair() throws NoSuchAlgorithmException {
+	public com.priyadarshan.entity.KeyPair getRSAKeyPair() throws NoSuchAlgorithmException {
 		
+		com.priyadarshan.entity.KeyPair keyPair;
 		String generatedTime = java.time.Clock.systemUTC().instant().toString();
 
 		List<com.priyadarshan.entity.KeyPair> keyPairList = new ArrayList<>();
@@ -33,9 +34,9 @@ public class KeyServiceImpl implements KeyService {
 		String privateKeyStr = Base64.encodeBase64String(privateKey.getEncoded());
 		String publicKeyStr = Base64.encodeBase64String(publicKey.getEncoded());
 		
-		keyPairList.add(new com.priyadarshan.entity.KeyPair(CommonConstant.RSA_KEY_INDEX, generatedTime, publicKeyStr, privateKeyStr));
+		keyPair = new com.priyadarshan.entity.KeyPair(CommonConstant.RSA_KEY_INDEX, generatedTime, publicKeyStr, privateKeyStr);
 		
-		return keyPairList;
+		return keyPair;
 	}
 
 }

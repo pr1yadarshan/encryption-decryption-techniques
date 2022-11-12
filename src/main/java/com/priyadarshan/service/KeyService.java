@@ -8,6 +8,6 @@ import com.priyadarshan.entity.KeyPair;
 
 public interface KeyService {
 	
-	public List<KeyPair> getRSAKeyPair() throws NoSuchAlgorithmException;
+	public KeyPair getRSAKeyPair() throws NoSuchAlgorithmException;
 
 }

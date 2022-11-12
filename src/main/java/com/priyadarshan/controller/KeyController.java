@@ -18,7 +18,7 @@ public class KeyController {
 	KeyService keyService;
 
 	@GetMapping("/generateRSAKeyPair")
-	public List<KeyPair> generateRSAKeyPair() throws NoSuchAlgorithmException {
+	public KeyPair generateRSAKeyPair() throws NoSuchAlgorithmException {
 		/* 
 		 * generating RSA key-pair and sending response as hash map 
 		*/
