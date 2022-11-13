@@ -1,8 +1,6 @@
 package com.priyadarshan.controller;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +18,6 @@ public class KeyController {
 
 	@GetMapping("/generateRsaKeyPair")
 	public KeyPair generateRSAKeyPair() throws NoSuchAlgorithmException {
-		/* 
-		 * generating RSA key-pair and sending response as json object 
-		*/
 		
 		return keyService.getRSAKeyPair();
 	}
@@ -32,4 +27,5 @@ public class KeyController {
 		
 		return keyService.getAesKey();
 	}
+	
 }
