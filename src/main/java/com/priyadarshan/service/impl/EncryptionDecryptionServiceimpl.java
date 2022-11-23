@@ -32,27 +32,32 @@ public class EncryptionDecryptionServiceimpl implements EncryptionDecryptionServ
 	KeyService keyService;
 
 	@Override
-	public String getAesEncryptedData(String toEncrypted) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+	public String getAesEncryptedData(String toEncrypt) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
 		
 		final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+		CryptLibUtil cryptLib = new CryptLibUtil();
 		
 		String aesKeyStr = keyService.getAesKey().getAesKey();
 		byte[] aesKeyBytes = Base64.decodeBase64(aesKeyStr.getBytes());
 		SecretKey aesKey = new SecretKeySpec(aesKeyBytes, 0, aesKeyBytes.length, "AES");
-		logger.info("Aes key -> " + aesKeyStr);
+		logger.debug("Aes key -> " + aesKeyStr);
 
 		byte[] iv = CryptLibUtil.getRandomNonce(16);
+		String ivStr = Base64.encodeBase64String(iv);
+		logger.debug("Random IV -> " + ivStr);
 		
-		String messageHash = CryptLibUtil.sha256UsingRandom(toEncrypted, iv);
-		logger.info("Message Hash -> " + messageHash);
+		String messageHash = CryptLibUtil.sha256UsingRandom(toEncrypt, iv);
+		logger.debug("Message Hash -> " + messageHash);
 		
-	    Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-	    cipher.init(Cipher.ENCRYPT_MODE, aesKey, new GCMParameterSpec(128, iv));
-	    byte[] encryptedText = cipher.doFinal(messageHash.getBytes());
-	    String encryptedTextStr = Base64.encodeBase64String(encryptedText);
-	    logger.info("Encrypted Text -> " + encryptedTextStr);
+	    String encryptedTextStr = cryptLib.encryptAESGCM(messageHash, aesKey, iv);
+	    logger.debug("Encrypted Text -> " + encryptedTextStr);
 	
 		return encryptedTextStr;
+	}
+	
+
+	public String getAesDecryptedData(String toDecrypt) {
+		return null;
 	}
 
 	@Override
