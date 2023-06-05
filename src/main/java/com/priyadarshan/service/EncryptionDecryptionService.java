@@ -12,9 +12,10 @@ import javax.crypto.NoSuchPaddingException;
 
 public interface EncryptionDecryptionService {
 	
-	public String getAesEncryptedData(String toEncrypted)throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException;
+	public String getAesEncryptedData(String toEncrypted)throws Exception;
 	public String getRsaEncryptedData(String toEncrypted);
 	public String getRsaEncryptedData(String toEncrypted, PublicKey publicKey) throws Exception;
 	String getRsaDecryptedData(String encrypted, PrivateKey privateKey) throws Exception;
+	String getJweEncryptedData(String toBeEncrypted, PublicKey publicKey) throws Exception;
 
 }

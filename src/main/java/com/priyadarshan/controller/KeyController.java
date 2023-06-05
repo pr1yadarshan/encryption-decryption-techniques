@@ -23,7 +23,7 @@ public class KeyController {
 	}
 	
 	@GetMapping("/generateAesKey")
-	public AesKey generateAesKy() throws NoSuchAlgorithmException {
+	public AesKey generateAesKy() throws Exception {
 		
 		return keyService.getAesKey();
 	}
